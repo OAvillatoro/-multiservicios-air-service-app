@@ -21,4 +21,6 @@ object AppRoutes {
     const val TECHNICIAN_REPORT = "technician_report"
 
     const val EQUIPMENT_HISTORY = "equipment_history"
+
+    const val CLIENT_PROFILE = "client_profile"
 }

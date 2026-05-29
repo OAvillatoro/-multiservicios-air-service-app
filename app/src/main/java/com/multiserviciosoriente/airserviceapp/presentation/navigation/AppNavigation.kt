@@ -13,6 +13,7 @@ import com.multiserviciosoriente.airserviceapp.presentation.screens.home.HomeAdm
 import com.multiserviciosoriente.airserviceapp.presentation.screens.home.HomeClientScreen
 import com.multiserviciosoriente.airserviceapp.presentation.screens.home.HomeManagerScreen
 import com.multiserviciosoriente.airserviceapp.presentation.screens.home.HomeTechnicianScreen
+import com.multiserviciosoriente.airserviceapp.presentation.screens.profile.ClientProfileScreen
 import com.multiserviciosoriente.airserviceapp.presentation.screens.requests.RequestInboxScreen
 import com.multiserviciosoriente.airserviceapp.presentation.screens.requests.ScheduleTechnicianScreen
 import com.multiserviciosoriente.airserviceapp.presentation.screens.requests.ServiceRequestFormScreen
@@ -74,6 +75,17 @@ fun AppNavigation() {
                 },
                 onHistoryClick = {
                     navController.navigate(AppRoutes.EQUIPMENT_HISTORY)
+                },
+                onProfileClick = {
+                    navController.navigate(AppRoutes.CLIENT_PROFILE)
+                }
+            )
+        }
+
+        composable(AppRoutes.CLIENT_PROFILE) {
+            ClientProfileScreen(
+                onBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -90,6 +102,12 @@ fun AppNavigation() {
             HomeTechnicianScreen(
                 onWorkOrdersClick = {
                     navController.navigate(AppRoutes.WORK_ORDERS)
+                },
+                onOrderDetailClick = {
+                    navController.navigate(AppRoutes.ORDER_DETAIL)
+                },
+                onReportClick = {
+                    navController.navigate(AppRoutes.TECHNICIAN_REPORT)
                 }
             )
         }
@@ -102,6 +120,9 @@ fun AppNavigation() {
                 onAddEquipmentClick = {
                     navController.navigate(AppRoutes.EQUIPMENT_FORM)
                 },
+                onRequestServiceClick = {
+                    navController.navigate(AppRoutes.SERVICE_REQUEST_FORM)
+                },
                 onHistoryClick = {
                     navController.navigate(AppRoutes.EQUIPMENT_HISTORY)
                 }
@@ -112,6 +133,9 @@ fun AppNavigation() {
             EquipmentFormScreen(
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onSaveClick = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -120,7 +144,11 @@ fun AppNavigation() {
             ServiceRequestFormScreen(
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+                onSubmitClick = {
+                    navController.popBackStack()
+                },
+                isAdmin = false
             )
         }
 
@@ -164,6 +192,9 @@ fun AppNavigation() {
             OrderDetailScreen(
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onReportClick = {
+                    navController.navigate(AppRoutes.TECHNICIAN_REPORT)
                 }
             )
         }

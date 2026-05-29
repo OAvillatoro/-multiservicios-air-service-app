@@ -12,9 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -75,6 +76,7 @@ fun LoginScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 22.dp, vertical = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -210,11 +212,13 @@ fun LoginScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Divider(modifier = Modifier.weight(1f))
+
                         Text(
                             text = "  o  ",
                             color = Color.Gray,
                             fontSize = 14.sp
                         )
+
                         Divider(modifier = Modifier.weight(1f))
                     }
 
@@ -235,7 +239,7 @@ fun LoginScreen(
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
                         text = "Accesos de prueba por rol",
@@ -243,20 +247,47 @@ fun LoginScreen(
                         fontSize = 12.sp
                     )
 
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        SmallRoleButton(
+                            text = "Cliente",
+                            onClick = onClientLoginClick,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        SmallRoleButton(
+                            text = "Admin",
+                            onClick = onAdminLoginClick,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        SmallRoleButton("Admin", onAdminLoginClick)
-                        SmallRoleButton("Encargado", onManagerLoginClick)
-                        SmallRoleButton("Técnico", onTechnicianLoginClick)
+                        SmallRoleButton(
+                            text = "Encargado",
+                            onClick = onManagerLoginClick,
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        SmallRoleButton(
+                            text = "Técnico",
+                            onClick = onTechnicianLoginClick,
+                            modifier = Modifier.weight(1f)
+                        )
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(24.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -267,6 +298,8 @@ fun LoginScreen(
                 BottomInfoItem("⏱", "Atención\nRápida")
                 BottomInfoItem("★", "Calidad\nGarantizada")
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
@@ -274,11 +307,12 @@ fun LoginScreen(
 @Composable
 private fun SmallRoleButton(
     text: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Button(
         onClick = onClick,
-        modifier = Modifier.height(36.dp),
+        modifier = modifier.height(40.dp),
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFFEAF2FF),
@@ -287,8 +321,9 @@ private fun SmallRoleButton(
     ) {
         Text(
             text = text,
-            fontSize = 11.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
         )
     }
 }

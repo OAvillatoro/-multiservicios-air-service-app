@@ -1,4 +1,4 @@
-package com.multiserviciosoriente.airserviceapp.presentation.screens.auth
+package com.multiserviciosoriente.airserviceapp.presentation.screens.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,8 +19,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
@@ -38,25 +38,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.multiserviciosoriente.airserviceapp.R
 
 @Composable
-fun RegisterClientScreen(
+fun ClientProfileScreen(
     onBackClick: () -> Unit
 ) {
-    var fullName by remember { mutableStateOf("") }
-    var username by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var phone by remember { mutableStateOf("") }
-    var address by remember { mutableStateOf("") }
-    var referencePoint by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var acceptedTerms by remember { mutableStateOf(false) }
+    var fullName by remember { mutableStateOf("Juan Pérez") }
+    var username by remember { mutableStateOf("juanperez") }
+    var email by remember { mutableStateOf("juan.perez@email.com") }
+    var phone by remember { mutableStateOf("7123-4567") }
+    var address by remember { mutableStateOf("Col. San Antonio, San Miguel") }
+    var referencePoint by remember { mutableStateOf("Casa color blanco, cerca del parque") }
 
     val primaryBlue = Color(0xFF003F99)
     val darkBlue = Color(0xFF002B75)
@@ -99,9 +95,9 @@ fun RegisterClientScreen(
                 }
 
                 Text(
-                    text = "Crear cuenta de cliente",
+                    text = "Mi perfil",
                     color = Color.White,
-                    fontSize = 25.sp,
+                    fontSize = 27.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.align(Alignment.Center)
                 )
@@ -120,11 +116,11 @@ fun RegisterClientScreen(
                 Image(
                     painter = painterResource(id = R.drawable.logo_multiservicios_oriente),
                     contentDescription = "Logo MultiServicios de Oriente",
-                    modifier = Modifier.size(155.dp)
+                    modifier = Modifier.size(145.dp)
                 )
 
                 Text(
-                    text = "¡Crea tu cuenta!",
+                    text = "Datos del cliente",
                     color = primaryBlue,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
@@ -134,82 +130,14 @@ fun RegisterClientScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Completa la información para registrarte y comenzar a usar la aplicación.",
+                    text = "Consulta y actualiza la información asociada a tu cuenta de cliente.",
                     color = Color.Gray,
                     fontSize = 17.sp,
                     textAlign = TextAlign.Center,
                     lineHeight = 23.sp
                 )
 
-                Spacer(modifier = Modifier.height(26.dp))
-
-                RegisterTextField(
-                    label = "Nombre completo *",
-                    value = fullName,
-                    placeholder = "Ingresa tu nombre completo",
-                    onValueChange = { fullName = it },
-                    keyboardType = KeyboardType.Text
-                )
-
-                RegisterTextField(
-                    label = "Nombre de usuario *",
-                    value = username,
-                    placeholder = "Elige un nombre de usuario",
-                    onValueChange = { username = it },
-                    keyboardType = KeyboardType.Text
-                )
-
-                RegisterTextField(
-                    label = "Correo electrónico *",
-                    value = email,
-                    placeholder = "ejemplo@correo.com",
-                    onValueChange = { email = it },
-                    keyboardType = KeyboardType.Email
-                )
-
-                RegisterTextField(
-                    label = "Teléfono *",
-                    value = phone,
-                    placeholder = "Ingresa tu número de teléfono",
-                    onValueChange = { phone = it },
-                    keyboardType = KeyboardType.Phone
-                )
-
-                RegisterTextField(
-                    label = "Dirección *",
-                    value = address,
-                    placeholder = "Ingresa tu dirección completa",
-                    onValueChange = { address = it },
-                    keyboardType = KeyboardType.Text
-                )
-
-                RegisterTextField(
-                    label = "Punto de referencia (opcional)",
-                    value = referencePoint,
-                    placeholder = "Ej. Casa color blanco cerca del parque",
-                    onValueChange = { referencePoint = it },
-                    keyboardType = KeyboardType.Text
-                )
-
-                RegisterTextField(
-                    label = "Contraseña *",
-                    value = password,
-                    placeholder = "Crea una contraseña segura",
-                    onValueChange = { password = it },
-                    keyboardType = KeyboardType.Password,
-                    isPassword = true
-                )
-
-                RegisterTextField(
-                    label = "Confirmar contraseña *",
-                    value = confirmPassword,
-                    placeholder = "Vuelve a escribir tu contraseña",
-                    onValueChange = { confirmPassword = it },
-                    keyboardType = KeyboardType.Password,
-                    isPassword = true
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
@@ -221,7 +149,7 @@ fun RegisterClientScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "🛡",
+                            text = "👤",
                             fontSize = 32.sp
                         )
 
@@ -229,14 +157,14 @@ fun RegisterClientScreen(
                             modifier = Modifier.padding(start = 12.dp)
                         ) {
                             Text(
-                                text = "Tu información está segura",
+                                text = "Cuenta de cliente",
                                 color = primaryBlue,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold
                             )
 
                             Text(
-                                text = "Protegemos tus datos personales y solo serán utilizados para la gestión de servicios de mantenimiento.",
+                                text = "Estos datos se utilizan para registrar tus solicitudes, ubicar tus equipos y coordinar visitas técnicas.",
                                 color = Color(0xFF5D6678),
                                 fontSize = 14.sp,
                                 lineHeight = 19.sp
@@ -245,44 +173,130 @@ fun RegisterClientScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(18.dp))
+                Spacer(modifier = Modifier.height(22.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.Top
-                ) {
-                    Checkbox(
-                        checked = acceptedTerms,
-                        onCheckedChange = { acceptedTerms = it }
-                    )
+                ProfileTextField(
+                    label = "Nombre completo *",
+                    value = fullName,
+                    placeholder = "Ingresa tu nombre completo",
+                    onValueChange = { fullName = it },
+                    keyboardType = KeyboardType.Text
+                )
 
-                    Text(
-                        text = "He leído y acepto los Términos y Condiciones y la Política de Privacidad *",
-                        color = textColor,
-                        fontSize = 15.sp,
-                        lineHeight = 21.sp,
-                        modifier = Modifier.padding(top = 12.dp)
-                    )
-                }
+                ProfileTextField(
+                    label = "Nombre de usuario *",
+                    value = username,
+                    placeholder = "Elige un nombre de usuario",
+                    onValueChange = { username = it },
+                    keyboardType = KeyboardType.Text
+                )
+
+                ProfileTextField(
+                    label = "Correo electrónico *",
+                    value = email,
+                    placeholder = "ejemplo@correo.com",
+                    onValueChange = { email = it },
+                    keyboardType = KeyboardType.Email
+                )
+
+                ProfileTextField(
+                    label = "Teléfono *",
+                    value = phone,
+                    placeholder = "Ingresa tu número de teléfono",
+                    onValueChange = { phone = it },
+                    keyboardType = KeyboardType.Phone
+                )
+
+                ProfileTextField(
+                    label = "Dirección *",
+                    value = address,
+                    placeholder = "Ingresa tu dirección completa",
+                    onValueChange = { address = it },
+                    keyboardType = KeyboardType.Text
+                )
+
+                ProfileTextField(
+                    label = "Punto de referencia",
+                    value = referencePoint,
+                    placeholder = "Ej. Casa color blanco cerca del parque",
+                    onValueChange = { referencePoint = it },
+                    keyboardType = KeyboardType.Text
+                )
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Button(
-                    onClick = onBackClick,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(58.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = primaryBlue
-                    )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = Color(0xFFFFF7E8),
+                    shape = RoundedCornerShape(14.dp)
                 ) {
-                    Text(
-                        text = "CREAR CUENTA",
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "ℹ️",
+                            fontSize = 30.sp
+                        )
+
+                        Column(
+                            modifier = Modifier.padding(start = 12.dp)
+                        ) {
+                            Text(
+                                text = "Información importante",
+                                color = orange,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = "Más adelante estos datos se guardarán en la tabla users mediante Room. Por ahora se usan datos de prueba para validar el diseño y la navegación.",
+                                color = Color(0xFF5D6678),
+                                fontSize = 14.sp,
+                                lineHeight = 19.sp
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(22.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    OutlinedButton(
+                        onClick = onBackClick,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(58.dp),
+                        shape = RoundedCornerShape(16.dp)
+                    ) {
+                        Text(
+                            text = "VOLVER",
+                            color = primaryBlue,
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    Button(
+                        onClick = onBackClick,
+                        modifier = Modifier
+                            .weight(1.4f)
+                            .height(58.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = primaryBlue
+                        )
+                    ) {
+                        Text(
+                            text = "GUARDAR CAMBIOS",
+                            color = Color.White,
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -292,22 +306,31 @@ fun RegisterClientScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Divider(modifier = Modifier.weight(1f))
+
                     Text(
-                        text = "  ¿Ya tienes una cuenta?  ",
+                        text = "  Perfil del cliente  ",
                         color = Color.Gray,
                         fontSize = 14.sp
                     )
+
                     Divider(modifier = Modifier.weight(1f))
                 }
 
-                TextButton(onClick = onBackClick) {
-                    Text(
-                        text = "Iniciar sesión",
-                        color = primaryBlue,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                Spacer(modifier = Modifier.height(14.dp))
+
+                Text(
+                    text = "Rol: Cliente",
+                    color = textColor,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Text(
+                    text = "Estado: Cuenta activa",
+                    color = Color(0xFF00865A),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
+                )
 
                 Spacer(modifier = Modifier.height(28.dp))
 
@@ -325,13 +348,12 @@ fun RegisterClientScreen(
 }
 
 @Composable
-private fun RegisterTextField(
+private fun ProfileTextField(
     label: String,
     value: String,
     placeholder: String,
     onValueChange: (String) -> Unit,
-    keyboardType: KeyboardType,
-    isPassword: Boolean = false
+    keyboardType: KeyboardType
 ) {
     val primaryBlue = Color(0xFF003F99)
 
@@ -359,11 +381,6 @@ private fun RegisterTextField(
                 )
             },
             singleLine = true,
-            visualTransformation = if (isPassword) {
-                PasswordVisualTransformation()
-            } else {
-                androidx.compose.ui.text.input.VisualTransformation.None
-            },
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType
             ),

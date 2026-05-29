@@ -36,7 +36,9 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeTechnicianScreen(
-    onWorkOrdersClick: () -> Unit
+    onWorkOrdersClick: () -> Unit,
+    onOrderDetailClick: () -> Unit,
+    onReportClick: () -> Unit
 ) {
     val primaryBlue = Color(0xFF003F99)
     val darkBlue = Color(0xFF002B75)
@@ -256,7 +258,8 @@ fun HomeTechnicianScreen(
                 status = "Programado",
                 statusColor = primaryBlue,
                 primaryBlue = primaryBlue,
-                onClick = onWorkOrdersClick
+                onDetailClick = onOrderDetailClick,
+                onReportClick = onReportClick
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -270,7 +273,8 @@ fun HomeTechnicianScreen(
                 status = "En proceso",
                 statusColor = orange,
                 primaryBlue = primaryBlue,
-                onClick = onWorkOrdersClick
+                onDetailClick = onOrderDetailClick,
+                onReportClick = onReportClick
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -284,7 +288,8 @@ fun HomeTechnicianScreen(
                 status = "Pendiente",
                 statusColor = green,
                 primaryBlue = primaryBlue,
-                onClick = onWorkOrdersClick
+                onDetailClick = onOrderDetailClick,
+                onReportClick = onReportClick
             )
 
             Spacer(modifier = Modifier.height(22.dp))
@@ -439,12 +444,13 @@ private fun TechnicianOrderCard(
     status: String,
     statusColor: Color,
     primaryBlue: Color,
-    onClick: () -> Unit
+    onDetailClick: () -> Unit,
+    onReportClick: () -> Unit
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() },
+            .clickable { onDetailClick() },
         color = Color.White,
         shape = RoundedCornerShape(16.dp),
         shadowElevation = 3.dp
@@ -518,7 +524,7 @@ private fun TechnicianOrderCard(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 OutlinedButton(
-                    onClick = onClick,
+                    onClick = onDetailClick,
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(10.dp)
                 ) {
@@ -531,7 +537,7 @@ private fun TechnicianOrderCard(
                 }
 
                 OutlinedButton(
-                    onClick = onClick,
+                    onClick = onReportClick,
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(10.dp)
                 ) {
